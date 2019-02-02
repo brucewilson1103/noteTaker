@@ -1,0 +1,2 @@
+# noteTaker
+Node, Express, MYSQL, AJAX, JQUERY, ROUTING, ENV, HEROKU, JAWSDB
