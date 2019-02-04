@@ -1,9 +1,15 @@
+// saved notes div reference
 var $notesList = $("#notes-list");
+// reference to the input from note title
 var $noteTitle = $("#note-title");
+// reference to the input from the note text
 var $noteText = $("#note-text");
 
+// this button must be clicked in order to send req.body to database
 var $submitBtn = $("#submit-btn");
 $submitBtn.on("click",handleNoteSubmit);
+
+// once it is in the database the user must refresh the page to see that it has been added?
 
 // Gets all notes from the database, renders the notes list
 var getAndRenderNotes = function() {
@@ -22,17 +28,13 @@ var getAndRenderNotes = function() {
       var $row = $("<div class='row'>");
       var $col11 = $("<div class='col-11'>");
       var $noteP = $("<p>").text('"' + note.text + '"');
-      var $authorP = $("<p class='float-right'>").text("- " + note.author);
+      var $titleP = $("<p class='float-right'>").text("- " + note.title);
       var $clearFix = $("<div class='clearfix'>");
-      var $ratingP = $("<p class='float-right'>").text(note.rating);
-      var $col1 = $("<div class='col-1'>");
-      var $upIcon = $("<i class='fas fa-angle-up'>");
-      var $downIcon = $("<i class='fas fa-angle-down'>");
+      var $col1 = $("<div class='col-1'>");;
 
       $li.append(
         $row.append(
-          $col11.append($noteP, $authorP, $clearFix, $ratingP),
-          $col1.append($upIcon, $downIcon)
+          $col11.append($noteP, $titleP, $clearFix)
         )
       );
 
@@ -45,40 +47,17 @@ var getAndRenderNotes = function() {
   });
 };
 
-// Increments or decrements the rating and updates the note in the db
-var handleRatingChange = function() {
-  // Getting a reference to the note data stored on the list item earlier
-  var note = $(this).parents(".list-group-item").data();
-  var shouldIncrement = $(this).hasClass("fa-angle-up");
-
-  // If the up arrow was clicked, increment the rating, else decrement it
-  if (shouldIncrement) {
-    note.rating++;
-  } else {
-    note.rating--;
-  }
-
-  // Submit a PUT request to update the note's rating
-  $.ajax({
-    url: "/api/notes/" + note.id,
-    method: "PUT",
-    data: note
-  })
-    .then(function() {
-      getAndRendernotes();
-    });
-};
 
 // Submits the note from the form to the db
 var handlenoteSubmit = function(event) {
   event.preventDefault();
 
   var note = {
-    author: $noteAuthor.val().trim(),
+    title: $notetitle.val().trim(),
     text: $noteText.val().trim()
   };
 
-  if (!note.author || !note.text) {
+  if (!note.title || !note.text) {
     alert("Please fill out all the required fields!");
     return;
   }
@@ -90,7 +69,7 @@ var handlenoteSubmit = function(event) {
   })
     .then(function() {
       getAndRendernotes();
-      $noteAuthor.val("");
+      $notetitle.val("");
       $noteText.val("");
     });
 };
@@ -108,28 +87,28 @@ $submitBtn.on("click", handlenoteSubmit);
 
 
 
-// this is what I made without reference to class activity
-var handleNoteSubmit = function(event) {
-  event.preventDefault();
+// // this is what I made without reference to class activity
+// var handleNoteSubmit = function(event) {
+//   event.preventDefault();
 
-  var Note = {
-    author: $noteAuthor.val().trim(),
-    text: $noteText.val().trim()
-  };
+//   var Note = {
+//     title: $notetitle.val().trim(),
+//     text: $noteText.val().trim()
+//   };
 
-  if (!note.author || !note.text) {
-    alert("Please fill out all the required fields!");
-    return;
-  }
+//   if (!note.title || !note.text) {
+//     alert("Please fill out all the required fields!");
+//     return;
+//   }
 
-  $.ajax({
-    url: "/api/notes",
-    method: "POST",
-    data: Note
-  })
-    .then(function() {
-      getAndRendernotes();
-      $noteAuthor.val("");
-      $noteText.val("");
-    });
-};
+//   $.ajax({
+//     url: "/api/notes",
+//     method: "POST",
+//     data: Note
+//   })
+//     .then(function() {
+//       getAndRendernotes();
+//       $notetitle.val("");
+//       $noteText.val("");
+//     });
+// };
