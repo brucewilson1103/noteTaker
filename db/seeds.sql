@@ -4,9 +4,9 @@ USE noteTakerDB;
 INSERT INTO notes
 (title, message)
 VALUES
-("HW", "Compelte homework by Monday night.");
+("HW", "Complete homework by Monday night.");
 
 INSERT INTO notes
 (title, message)
 VALUES
-("SuperBowl", "Compelte homework by Monday night.");
+("SuperBowl", "Have fun with the family.");
