@@ -30,13 +30,15 @@ var getAndRenderNotes = function() {
       var $noteP = $("<p>").text('"' + note.message + '"');
       var $titleP = $("<p class='float-right'>").text("- " + note.title);
       var $clearFix = $("<div class='clearfix'>");
-      var $col1 = $("<div class='col-1'>");;
+      var $col1 = $("<div class='col-1'>");
+      var $trashIcon = $("<i class='fas fa-trash-alt js-delete-note'>");
+      $trashIcon.attr("data-id", note.id)
 
       $li.append(
         $row.append(
-          $col11.append($noteP, $titleP, $clearFix)
-        )
-      );
+          $col11.append($noteP, $titleP, $clearFix),
+          $col1.append($trashIcon)
+      ));
 
       $listItems.push($li);
     }
@@ -47,6 +49,16 @@ var getAndRenderNotes = function() {
   });
 };
 
+$(document).on("click", ".js-delete-note", function(){
+  $.ajax({
+    url: "/api/notes/" + $(this).attr("data-id"),
+    method: "DELETE"
+  })
+  .then(function(data){
+    console.log(data);
+    location.reload();
+  } )
+});
 
 // Submits the note from the form to the db
 var handleNoteSubmit = function(event) {

@@ -15,4 +15,9 @@ router.post("/api/notes", function(req, res) {
   });
 });
 
+router.delete("/api/notes/:id", function(req, res) {
+  connection.query("DELETE FROM notes WHERE ?", {id:req.params.id}, function(err, dbNotes) {
+    res.json(dbNotes);
+  });
+});
 module.exports = router;
