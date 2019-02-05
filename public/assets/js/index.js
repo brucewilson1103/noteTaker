@@ -3,11 +3,11 @@ var $notesList = $("#notes-list");
 // reference to the input from note title
 var $noteTitle = $("#note-title");
 // reference to the input from the note text
-var $noteText = $("#note-text");
+var $noteMessage = $("#note-text");
 
 // this button must be clicked in order to send req.body to database
 var $submitBtn = $("#submit-btn");
-$submitBtn.on("click",handleNoteSubmit);
+// $submitBtn.on("click",handleNoteSubmit);
 
 // once it is in the database the user must refresh the page to see that it has been added?
 
@@ -53,11 +53,11 @@ var handleNoteSubmit = function(event) {
   event.preventDefault();
 
   var note = {
-    title: $notetitle.val().trim(),
-    text: $noteText.val().trim()
+    title: $noteTitle.val().trim(),
+    message: $noteMessage.val().trim()
   };
 
-  if (!note.title || !note.text) {
+  if (!note.title || !note.message) {
     alert("Please fill out all the required fields!");
     return;
   }
@@ -69,8 +69,8 @@ var handleNoteSubmit = function(event) {
   })
     .then(function() {
       getAndRenderNotes();
-      $notetitle.val("");
-      $noteText.val("");
+      $noteTitle.val("");
+      $noteMessage.val("");
     });
 };
 
@@ -85,7 +85,7 @@ $submitBtn.on("click", handleNoteSubmit);
 
 //   var Note = {
 //     title: $notetitle.val().trim(),
-//     text: $noteText.val().trim()
+//     text: $noteMessage.val().trim()
 //   };
 
 //   if (!note.title || !note.text) {
@@ -101,6 +101,6 @@ $submitBtn.on("click", handleNoteSubmit);
 //     .then(function() {
 //       getAndRendernotes();
 //       $notetitle.val("");
-//       $noteText.val("");
+//       $noteMessage.val("");
 //     });
 // };
