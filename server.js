@@ -3,7 +3,7 @@ var path = require("path");
 var connection = require("./db/connection");
 require('dotenv').config()
 var apiRoutes = require("./routes/apiRoutes");
-// var htmlRoutes = require("./routes/htmlRoutes");
+var htmlRoutes = require("./routes/htmlRoutes");
 
 var app = express();
 
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use(apiRoutes);
-// app.use(htmlRoutes);
+app.use(htmlRoutes);
 
 app.listen(PORT, function(){
   console.log("APP is rocking and rolling.")

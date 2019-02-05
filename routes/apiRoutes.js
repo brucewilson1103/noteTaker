@@ -5,6 +5,7 @@ var connection = require("../db/connection");
 router.get("/api/notes", function(req, res) {
   connection.query("SELECT * FROM notes", function(err, dbNotes) {
     res.json(dbNotes);
+    console.log("this is apiroutes")
   });
 });
 

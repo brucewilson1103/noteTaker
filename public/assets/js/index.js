@@ -27,7 +27,7 @@ var getAndRenderNotes = function() {
       var $li = $("<li class='list-group-item'>").data(note);
       var $row = $("<div class='row'>");
       var $col11 = $("<div class='col-11'>");
-      var $noteP = $("<p>").text('"' + note.text + '"');
+      var $noteP = $("<p>").text('"' + note.message + '"');
       var $titleP = $("<p class='float-right'>").text("- " + note.title);
       var $clearFix = $("<div class='clearfix'>");
       var $col1 = $("<div class='col-1'>");;
@@ -49,7 +49,7 @@ var getAndRenderNotes = function() {
 
 
 // Submits the note from the form to the db
-var handlenoteSubmit = function(event) {
+var handleNoteSubmit = function(event) {
   event.preventDefault();
 
   var note = {
@@ -68,24 +68,16 @@ var handlenoteSubmit = function(event) {
     data: note
   })
     .then(function() {
-      getAndRendernotes();
+      getAndRenderNotes();
       $notetitle.val("");
       $noteText.val("");
     });
 };
 
 
-getAndRendernotes();
+getAndRenderNotes();
 
-$submitBtn.on("click", handlenoteSubmit);
-
-
-
-
-
-
-
-
+$submitBtn.on("click", handleNoteSubmit);
 
 // // this is what I made without reference to class activity
 // var handleNoteSubmit = function(event) {
