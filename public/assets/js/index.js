@@ -18,6 +18,8 @@ var getAndRenderNotes = function() {
     method: "GET"
   }).then(function(data) {
     var $listItems = [];
+    
+    
 
     // Loop through and build a list item for each note returned from the db
     for (var i = 0; i < data.length; i++) {
@@ -41,6 +43,13 @@ var getAndRenderNotes = function() {
       ));
 
       $listItems.push($li);
+      $("#title1").text(note.title);
+      $("#message1").text(note.message);
+      $("#title2").text(note.title);
+      $("#message2").text(note.message);
+      $("#title3").text(note.title);
+      $("#message3").text(note.message);
+
     }
 
     $notesList.empty();
